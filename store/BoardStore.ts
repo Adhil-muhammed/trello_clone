@@ -1,4 +1,5 @@
 import { getTodosGroupedByColum } from "@/lib/getTodosGroupedByColum";
+import { data } from "autoprefixer";
 import { create } from "zustand";
 
 interface BoardState {
@@ -11,8 +12,8 @@ export const useBordStore = create<BoardState>((set) => ({
     columns: new Map<TypedColumn, Columns>(),
   },
   getBoard: async () => {
-    const boards = await getTodosGroupedByColum();
-    // set({ board });
+    const board = await getTodosGroupedByColum();
+    set({ board });
   },
 }));
 
