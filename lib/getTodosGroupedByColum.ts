@@ -5,7 +5,9 @@ export const getTodosGroupedByColum = async () => {
     process.env.NEXT_PUBLIC_DATABASE_ID!,
     process.env.NEXT_PUBLIC_TODOS_COLLECTION_ID!
   );
+
   const todos = data?.documents;
+
   const columns = todos?.reduce((acc, todo) => {
     if (!acc.get(todo?.status)) {
       acc?.set(todo?.status, {
@@ -22,6 +24,7 @@ export const getTodosGroupedByColum = async () => {
       image: todo?.image && todo?.image,
       // ...(todo?.image && { image: todo.image }),
     });
+
     return acc;
   }, new Map<TypedColumn, Columns>());
 
@@ -36,12 +39,10 @@ export const getTodosGroupedByColum = async () => {
     }
   }
 
-  // sortingc columns
-
   const sortedColumns = new Map(
-    Array.from(columns.entries()).sort(
-      (a, b) => columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0])
-    )
+    Array.from(columns.entries()).sort((a, b) => {
+      return columnTypes.indexOf(a[0]) - columnTypes.indexOf(b[0]);
+    })
   );
   // console.log("todos: ", columns);
   // console.log("sortedColumns: ", sortedColumns);
