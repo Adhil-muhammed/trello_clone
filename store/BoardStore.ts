@@ -1,5 +1,4 @@
 import { getTodosGroupedByColum } from "@/lib/getTodosGroupedByColum";
-import { data } from "autoprefixer";
 import { create } from "zustand";
 
 interface BoardState {
